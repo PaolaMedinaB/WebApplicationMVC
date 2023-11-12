@@ -1,0 +1,36 @@
+﻿@model WebApplicationMVC.Models.Usuario 
+
+@{
+    ViewData["Title"] = "Usuarios";
+}
+
+
+<h2>Iniciar sesión</h2>
+
+<form asp-action="Login" method="post">
+    <div class="form-group">
+        <label asp-for="NombreUsuario">Nombre de Usuario</label>
+        <input asp-for="NombreUsuario" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Pass">Contraseña</label>
+        <input asp-for="Pass" type="password" class="form-control" />
+    </div>
+    
+    <button type="submit" asp-action="Login" class="btn btn-primary">Iniciar Sesión</button>
+
+    <p>Eres un nuevo usuario?</p> 
+    <a href="@Url.Action("CreateUserForm","Home")">Crear nueva cuenta</a>
+ 
+
+</form>
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+
+        @TempData["SuccessMessage"]
+    </div>
+}

@@ -1,0 +1,50 @@
+﻿@model List<WebApplicationMVC.Models.Persona>
+@{
+    ViewData["Title"] = "Personas";
+}
+
+<h2>Lista de Personas</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Identificador</th>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>Número de Identificación</th>
+            <th>Email</th>
+            <th>Tipo Identificación</th>
+            <th>Fecha de Creación</th>
+            <th>Identificación Concatenada</th>
+            <th>Nombres y Apellidos Concatenados</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            foreach (var persona in Model)
+            {
+                <tr>
+                    <td>@persona.Id</td>
+                    <td>@persona.Nombres</td>
+                    <td>@persona.Apellidos</td>
+                    <td>@persona.NumeroIdentificacion</td>
+                    <td>@persona.Email</td>
+                    <td>@persona.TipoIdentificacion</td>
+                    <td>@persona.FechaCreacion</td>
+                    <td>@persona.NumeroIdentificacionConcat</td>
+                    <td>@persona.NombresApellidosConcat</td>
+                    <!-- Add other columns as needed -->
+                </tr> 
+            }
+        }
+        else
+        {
+            <p>No se encontraron registros de personas.</p>
+        }
+
+    </tbody>
+</table>
+<p>
+    <a asp-controller="Home"  asp-action="CreateForm" class="btn btn-primary">Crear Persona</a>
+</p>

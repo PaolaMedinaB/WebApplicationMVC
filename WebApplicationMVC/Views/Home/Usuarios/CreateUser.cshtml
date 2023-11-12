@@ -1,0 +1,19 @@
+﻿@model WebApplicationMVC.Models.Usuario
+<h2>Crear Usuario</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="NombreUsuario">Nombre de usuario</label>
+        <input asp-for="NombreUsuario" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Pass">Contraseña</label>
+        <input asp-for="Pass" type="password" class="form-control" />
+    </div>
+
+    <!-- Otras propiedades según la entidad Usuario -->
+
+    <button type="submit" asp-action="CreateUser" class="btn btn-primary">Guardar</button>
+    
+</form>
+

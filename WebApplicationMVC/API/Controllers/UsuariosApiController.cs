@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApplicationMVC.App_Data;
+using WebApplicationMVC.API.Models;
 using WebApplicationMVC.Models;
-
 
 namespace WebApplicationMVC.API.Controllers
 {
@@ -20,27 +20,34 @@ namespace WebApplicationMVC.API.Controllers
 
 
         [HttpPost("login")]
-        public IActionResult Login([FromBody] Usuario usuario)
+        public IActionResult Login([FromBody] UsuarioAPI usuarioAPI)
         {
-            var user = _context.Usuarios.FirstOrDefault(u => u.NombreUsuario == usuario.NombreUsuario && u.Pass == usuario.Pass);
 
-            if (user != null)
+            var usuario = _context.Usuarios.SingleOrDefault(u => u.NombreUsuario == usuarioAPI.NombreUsuario && u.Pass == usuarioAPI.Pass);
+
+            if (usuario != null)
             {
-                return Ok("Login exitoso");
+                // Credentials are valid
+                return Ok("Login exitoso!"); // Redirect to a success page or perform other actions
             }
             else
             {
-                return BadRequest("Usuario o contraseña incorrectos");
+                // Credentials are not valid
+                return BadRequest("Nombre de usuario o contraseña incorrectos");
             }
         }
 
         [HttpPost]
-        public IActionResult CrearUsuario([FromBody] Usuario usuario)
+        public IActionResult CreateUser([FromBody] UsuarioAPI usuarioAPI)
         {
-
+            Usuario usuario = new Usuario();
+            usuario.NombreUsuario = usuarioAPI.NombreUsuario;
+            usuario.Pass = usuarioAPI.Pass;
             _context.Usuarios.Add(usuario);
             _context.SaveChanges();
             return Ok(usuario);
+
         }
+
     }
 }

@@ -21,6 +21,9 @@ namespace WebApplicationMVC.App_Data
         public DbSet<Persona> Personas { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
 
+        public DbSet<PersonaAPI> PersonasAPI { get; set; }
+        public DbSet<UsuarioAPI> UsuariosAPI { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));

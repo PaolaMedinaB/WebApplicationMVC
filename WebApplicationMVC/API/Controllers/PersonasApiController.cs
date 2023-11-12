@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using WebApplicationMVC.App_Data;
 using WebApplicationMVC.API.Models;
+using WebApplicationMVC.Models;
 
 namespace WebApplicationMVC.API.Controllers
 {
@@ -24,11 +25,29 @@ namespace WebApplicationMVC.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult CrearPersona([FromBody] PersonaAPI persona)
+        public IActionResult CrearPersona([FromBody] PersonaAPI personaAPI)
         {
-            //_context.Personas.Add(persona);
-            _context.SaveChanges();
-            return Ok(persona);
+            try
+            {
+                Persona persona = new Persona();
+                // Manually map properties
+                persona.Nombres = personaAPI.Nombres;
+                persona.Apellidos = personaAPI.Apellidos;
+                persona.NumeroIdentificacion = personaAPI.NumeroIdentificacion;
+                persona.Email = personaAPI.Email;
+                persona.TipoIdentificacion = personaAPI.TipoIdentificacion;
+                persona.FechaCreacion = personaAPI.FechaCreacion;
+
+                _context.Personas.Add(persona);
+                _context.SaveChanges();
+                return Ok(persona);
+            }
+            
+            catch (Exception ex)
+            {
+                return BadRequest(new { error = ex.Message, stackTrace = ex.StackTrace
+            });
+    }
         }
 
     }

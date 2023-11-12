@@ -75,25 +75,7 @@ namespace WebApplicationMVC.Controllers
                 return View("Usuarios/Login"); // Return to the login view with an error message
             }
         }
-        [HttpPost]
-        public IActionResult LoCheckCredentialsgin(string userName, string password)
-        {
-            // Lógica para validar el inicio de sesión
-            var usuario = _context.Usuarios.SingleOrDefault(u => u.NombreUsuario == userName && u.Pass == password);
-
-            if (usuario != null)
-            {
-                // Usuario válido, redirigir a la página principal
-                return Ok("Login exitoso!");
-            
-        }
-            else
-            {
-                // Usuario no válido, mostrar mensaje de error
-                ModelState.AddModelError("", "Nombre de usuario o contraseña incorrectos");
-                return View();
-            }
-        }
+        
 
         //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         //public IActionResult Error()
